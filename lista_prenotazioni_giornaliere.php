@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 include_once "config.php";
 
 // query di inserimento preparata
-$sql = "SELECT * FROM prenotazioni";
+$sql = "SELECT * FROM prenotazioni WHERE prenotazioni.giorno = CURDATE()";
 
 use League\Plates\Engine;
 
@@ -28,6 +28,7 @@ function convertiData($row) {
 }
 
 $result = array_map('convertiData', $result);
+$today = convertiData(['giorno' => date('d-m-Y')])['giorno'];
 
 // rendo un template che mi visualizza le tabelle
-echo $templates->render('lista_prenotazioni', ['result' => $result]);
+echo $templates->render('lista_prenotazioni_giornaliere', ['result' => $result, 'today' => $today]);

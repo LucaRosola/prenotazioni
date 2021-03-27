@@ -1,0 +1,26 @@
+body {
+    height: 100%;
+    margin: 50px;
+}
+
+.error::after, .error::before {
+    content: "⛔";
+    padding: 0 10px;
+}
+
+.success::after, .success::before {
+    content: "✔️";
+    padding: 0 10px;
+}
+
+h1 {
+    font-family: "Arial Black";
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
