@@ -1,33 +1,35 @@
 <?php
 
 require 'vendor/autoload.php';
-include_once "config.php";
-
-// query di inserimento preparata
-$sql = "SELECT * FROM prenotazioni";
+include_once 'config.php';
 
 use League\Plates\Engine;
 
-// viene creato l'oggetto per la gestione dei template
-$templates = new Engine('./view', 'tpl');
+//Viene creato l'oggetto per la gestione dei template
+$templates = new Engine('./view','tpl');
 
+//Query per recuperare tutte le prenotazioni
+$sql = "SELECT * FROM prenotazioni";
+
+//Invio la query al server MySQL
 $stmt = $pdo->query($sql);
 
-// estraggo le righe di risposta che finiranno come vettori
+//Estraggo le righe di risposta che finiranno come vettori in $result
 $result = $stmt->fetchAll();
 
-$mesi = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+//Se sei una persona che ha fatto il login
+if (isset($_SESSION['username']))
+{
+    $username = $_SESSION['username'];
 
-function convertiData($row) {
-    GLOBAL $mesi;
-    $giorno = date("d", strtotime($row['giorno']));
-    $mese = date("m", strtotime($row['giorno']));
-    $anno = date("Y", strtotime($row['giorno']));
-    $row['giorno'] = $giorno.' '.$mesi[(int) $mese].' '.$anno;
-    return $row;
+    //Rendo un template che mi visualizza la tabella
+    echo $templates->render('lista_prenotazioni',
+        [
+            'result' => $result,
+            'username' => $username
+        ]
+
+    );
 }
-
-$result = array_map('convertiData', $result);
-
-// rendo un template che mi visualizza le tabelle
-echo $templates->render('lista_prenotazioni', ['result' => $result]);
+else
+    echo $templates->render('utente_non_autorizzato');
