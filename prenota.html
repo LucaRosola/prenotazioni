@@ -3,30 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Prenotazioni</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
 </head>
 <body>
     <h1>Portale prenotazioni</h1>
-    <form action="prenota.php" method="POST">
+    <p>Inserisci i tuoi dati per prenotare un tampone</p>
+    <form action="prenota.php" method="post">
         <fieldset>
             <legend>Inserisci la prenotazione</legend>
-            <label for="codice_fiscale">Codice</label>
-            <input type="text" id="codice_fiscale" placeholder="Codice fiscale" name="codice_fiscale">
+            <label for="codice">Codice fiscale</label>
+            <input type="text" id="codice" placeholder="Codice fiscale" name="codice">
             <label for="giorno">Giorno</label>
             <input type="date" id="giorno" placeholder="Giorno scelto" name="giorno">
             <input type="submit" value="Invia la tua richiesta">
-        </fieldset>
-    </form>
-
-    <form action="visualizza_prenotazione.php" method="POST">
-        <fieldset>
-            <legend>Visualizza una prenotazione</legend>
-            <label for="codice_fiscale">Codice fiscale</label>
-            <input type="text" id="codice_fiscale" placeholder="Codice fiscale" name="codice_fiscale">
-            <label for="codice_prenotazione">Codice prenotazione</label>
-            <input type="text" id="codice_prenotazione" placeholder="Codice prenotazione" name="codice_prenotazione">
-            <input type="submit" value="Visualizza la tua prenotazione">
         </fieldset>
     </form>
 </body>
